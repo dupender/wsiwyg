@@ -1,0 +1,22 @@
+img{
+  width: 100px;
+  height: 100px;
+
+}
+
+.person{
+  text-align: center;
+  width: 200px;
+  height: 250px;
+  background-color: lightYellow;
+  margin: 25px;
+}
+
+.person:nth-child(even){
+  background-color: lightBlue;
+}
+
+.dottedBorder{
+  border-style:dotted;
+}
+
