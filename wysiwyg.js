@@ -10,7 +10,6 @@
 // When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
 // When you press the enter/return key when typing in the input field, then the content of the input field should immediately be blank.
 
-// Create an array of objects that represents famous people (see structure below).
 var peopleArray = [
   {title: "Activist,",
   name: "Mahatma Gandhi",
@@ -38,63 +37,28 @@ container.innerHTML += "<div class='person'><header id ='hdr'>" + "Title and Nam
 
 // When you click on one of the person elements, a dotted border should appear around it.
 // When you click on one of the person elements, the text input should immediately gain focus so that you can start typing. NOTE 1
-// for Header element:
 container.addEventListener("click", function(event){
-  // console.log("event",event );
-  // if(event.target.id === "hdr" ||"footer"){
-    tgt = event.target;
-    tgt.classList.add("dottedBorder");
+    //thePerson variable finds the closest div with a class of person to what you have clicked on
+    var thePerson = event.target.closest('.person');
+    thePerson.classList.add("dottedBorder");
     document.getElementById("textInput").focus();
-    var bio= document.getElementById("bio"); 
-    grabInput(event.target);
-    // console.log(document.getElementById("bio").innerHTML);
-    // }
+    grabInput(thePerson);
   });
-
-// NOTE 1 for section element:
-// container.addEventListener("click", function(event){
-//   console.log("event",event.target );
-//   if(event.srcElement.parentElement.id === "sect"){
-//     tgt = event.srcElement.parentNode;
-//     tgt.classList.add("dottedBorder");
-//     document.getElementById("textInput").focus();
-//     var bio= document.getElementById("bio"); 
-//     grabInput(event.target);
-//     // document.getElementById("bio").innerHTML = document.getElementById("textInput").value;
-//     }
-  // });
-
-// NOTE 1 for 
-// container.addEventListener("click", function(event){
-//   console.log("event",event );
-//   if(event.target.id === "foot"){
-//     tgt = event.target;
-//     tgt.classList.add("dottedBorder");
-//     document.getElementById("textInput").focus();
-//     // document.getElementById("bio").innerHTML = document.getElementById("textInput").value;
-//     }
-//   });
 
 // When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
 // When you press the enter/return key when typing in the input field, then the content of the input field should immediately be blank.
 function grabInput(temp){
-document.getElementById("textInput").addEventListener("keypress", function(){
-  var input = document.getElementById("textInput").value
-  temp.innerHTML = input;
-});
+  console.log("temp",temp );
+  //bioText starts with the temp input (which is teh whole .person element)
+  // Then it selects all the children and chooses the one in the 1 index - which is the section with id=sect
+  //then it selects all the children of that one and takes the 0 index - which is the p tag with the id=bio
+  var bioText = temp.children[1].children[0];
+  document.getElementById("textInput").addEventListener("keypress", function(e){
+    var input = document.getElementById("textInput").value
+    bioText.innerHTML = input;
+    if(e.keyCode === 13)
+    {
+      document.getElementById("textInput").value  = "";  
+    }
+  });
 }
-// document.getElementById("sect").addEventListener("mouseover", function(){
-//     document.getElementById("bio").innerHTML = document.getElementById("textInput").value;
-// });
-
-// document.getElementById("foot").addEventListener("mouseover", function(){
-//     document.getElementById("bio").innerHTML = document.getElementById("textInput").value;
-// });
-
-
-
-
-
-
-
-
